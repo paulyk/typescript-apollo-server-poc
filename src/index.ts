@@ -1,5 +1,9 @@
 import { ApolloServer, gql } from 'apollo-server'
-import { books } from './data';
+import { createBook, getBooks } from './data'
+import { BookInput } from './types'
+
+console.clear()
+console.log('start')
 
 const typeDefs = gql`
 
@@ -12,6 +16,15 @@ const typeDefs = gql`
         name: String!
         author: String!
     }
+
+    input BookInput {
+        name: String!
+        author: String!        
+    }
+
+    type Mutation {
+        createBook(input: BookInput): Book
+    }
 `
 
 const resolvers = {
@@ -19,10 +32,13 @@ const resolvers = {
         greet: () => "Hi Dude!",
         books: (_: any, { count }: { count?: number }) => {
             if (count) {
-                return books.filter((_, i) => i < count)
+                return getBooks().filter((_, i) => i < count)
             }
-            return books
+            return getBooks()
         }
+    },
+    Mutation: {
+        createBook: (_: any, { input }: { input: BookInput }) => createBook(input)
     }
 }
 
