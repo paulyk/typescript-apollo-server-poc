@@ -17,7 +17,7 @@ const typeDefs = gql`
 const resolvers = {
     Query: {
         greet: () => "Hi Dude!",
-        books: (_: any, {count }: { count?: number } ) => {
+        books: (_: any, { count }: { count?: number }) => {
             if (count) {
                 return books.filter((_, i) => i < count)
             }
