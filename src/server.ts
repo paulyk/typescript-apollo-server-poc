@@ -1,5 +1,5 @@
 import { ApolloServer, gql } from 'apollo-server'
-import { createBook, getBooks } from './data'
+import { createBook, getBooks } from './db'
 import { BookInput } from './types'
 
 console.clear()
@@ -22,8 +22,13 @@ const typeDefs = gql`
         author: String!        
     }
 
+    type BookUpdatePayload {
+        book: Book
+        errors: [String!]!
+    }
+    
     type Mutation {
-        createBook(input: BookInput): Book
+        createBook(input: BookInput): BookUpdatePayload
     }
 `
 

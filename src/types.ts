@@ -8,7 +8,8 @@ export interface BookInput {
     author: string
 }
 
-export interface MutationPayload<T> {
-    result: T | null,
+export interface BookUpdatePayload {
+    book: Book | null
     errors: string[]
 }
+

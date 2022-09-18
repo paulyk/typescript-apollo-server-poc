@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "tsc && node ./dist"
+    "start": "tsc && node ./dist/server"
   },
   "keywords": [],
   "author": "Paul Krisadaolarn",

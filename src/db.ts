@@ -1,4 +1,4 @@
-import { Book, BookInput, MutationPayload } from "./types"
+import { Book, BookInput, BookUpdatePayload } from "./types"
 
 
 export let books: Book[] = [
@@ -29,11 +29,17 @@ export function getBooks(): Book[] {
     return books
 }
 
-export function createBook(input: BookInput): Book | null {
-    if (!input.name || !input.author) {
-        return null
+export function createBook(input: BookInput): BookUpdatePayload {
+    const payload: BookUpdatePayload = {
+        book: null,
+        errors: !input.name || !input.author ? ["Name and author required"]: []
     }
+    if (payload.errors.length > 0) {
+        return payload;
+    }
+
     const book: Book = input
     books.push(input)
-    return book
+    payload.book = book;
+    return payload;
 }
